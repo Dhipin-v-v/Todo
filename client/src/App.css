@@ -1,0 +1,65 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form {
+  width: 22rem;
+  display: flex;
+}
+
+.form-container input {
+  padding: 0.6rem;
+  border: 2px solid;
+  outline: none;
+  width: 100%;
+}
+
+.form-container button {
+  width: 3.7rem;
+  padding: 0.6rem;
+  background-color: rgb(48, 48, 48);
+  color: white;
+  cursor: pointer;
+}
+
+.task-container {
+  width: 22rem;
+  margin-top: 1rem;
+}
+
+.task {
+  display: flex;
+  align-items: flex-start;
+  color: white;
+  background-color: rgb(48, 48, 48);
+  height: auto;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  border-radius: 0.3rem;
+}
+
+.icon-container {
+  display: flex;
+  width: 10%;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1.2rem;
+}
+
+.todo-container {
+  width: 80%;
+}
+
+.todo-container p {
+  word-wrap: break-word;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.stike {
+  text-decoration: line-through;
+}
