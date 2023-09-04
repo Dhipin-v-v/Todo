@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+let loading = false
 const getAllTodos = () => {
   try {
     return axios.get('http://localhost:5000/get')
@@ -8,9 +8,9 @@ const getAllTodos = () => {
   }
 }
 
-const addTodo = async (task) => {
+const addTodo = (task) => {
   try {
-    return await axios.post('http://localhost:5000/add', { task: task })
+    return axios.post('http://localhost:5000/add', { task: task })
   } catch (error) {
     console.log(error)
   }
@@ -25,7 +25,7 @@ const toggleTask = async (id) => {
 }
 const removeTask = async (id) => {
   try {
-    return await axios.delete('http://localhost:5000/remove/' + id)
+    return axios.delete('http://localhost:5000/remove/' + id)
   } catch (error) {
     console.log(error)
   }

@@ -14,17 +14,14 @@ const getAllTodos = async (req, res) => {
 }
 
 const updateTask = async (req, res) => {
-  console.log("request")
   const { id } = req.params
   const todo = await TodoModel.findOne({ _id: id })
   const {done} = todo
   await TodoModel.findByIdAndUpdate(id,{ done: !done })
-  console.log(await TodoModel.findOne({ _id: id }))
   res.status(200).send("Done")
 }
 
 const deleteTask = async (req, res) => {
-  console.log("request")
   const { id } = req.params
   await TodoModel.findByIdAndDelete(id)
   res.status(200).send("Deleted")

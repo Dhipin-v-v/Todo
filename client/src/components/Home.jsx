@@ -9,19 +9,36 @@ import {
 
 const Home = () => {
   const [todos, setTodos] = useState([])
-  useEffect(() => {
-    const fetchTodos = async () => {
-      const { data } = await getAllTodos()
-      setTodos(data.todos)
-      console.log("fetching")
+  const [loading, setLoading] = useState(1)
+
+  const fetchTodos = async () => {
+    console.log('Fetching')
+    const { data } = await getAllTodos()
+    setTodos(data.todos)
+  }
+
+  const handleDelete = async (id) => {
+    const { data } = await removeTask(id)
+    if (data) {
+      setLoading((oldValue) => oldValue+1)
     }
+  }
+
+  const handleToggle = async (id) => {
+    const { data } = await toggleTask(id)
+    if (data) {
+      setLoading((oldValue) => oldValue+1)
+    }
+  }
+
+  useEffect(() => {
     fetchTodos()
-  }, [todos])
- 
+  }, [loading])
+
   return (
     <div className='home'>
       <h2>Todo App</h2>
-      <Create />
+      <Create setLoading={setLoading} />
       {todos.length === 0 ? (
         <div>
           <h2>No record</h2>
@@ -33,7 +50,7 @@ const Home = () => {
               <div className='task' key={index}>
                 <div
                   className='icon-container'
-                  onClick={() => toggleTask(todo._id)}
+                  onClick={() => handleToggle(todo._id)}
                 >
                   {todo.done ? (
                     <BsFillCheckCircleFill className='icon' />
@@ -45,7 +62,10 @@ const Home = () => {
                   <p className={todo.done ? 'stike' : ''}>{todo.task}</p>
                 </div>
                 <div className='icon-container'>
-                  <BsFillTrashFill className='icon' onClick={()=>removeTask(todo._id)}/>
+                  <BsFillTrashFill
+                    className='icon'
+                    onClick={() => handleDelete(todo._id)}
+                  />
                 </div>
               </div>
             )

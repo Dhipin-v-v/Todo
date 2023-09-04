@@ -1,18 +1,25 @@
-import { useEffect, useState } from 'react'
-import {addTodo} from '../api/axios'
-const Create = () => {
-  const [task, setTask] = useState([])
+import {useEffect, useState } from 'react'
+import { addTodo } from '../api/axios'
+const Create = ({setLoading}) => {
+  const [task, setTask] = useState('')
+
   const handlechange = (e) => {
     setTask(e.target.value)
   }
-  const handleAdd = (e) => {
-    e.preventDefault();
-    addTodo(task)
+
+  const handleAdd = async(e) => {
+    e.preventDefault()
+    const {data} = await addTodo(task)
+    if(data){      
+      setLoading((oldValue) => oldValue+1)
+      setTask('')
+    }
   }
+
   return (
     <div className='form-container'>
       <form onSubmit={handleAdd} className='form'>
-        <input type='text' placeholder='Enter task' onChange={handlechange} />
+        <input type='text' value={task} placeholder='Enter task' onChange={handlechange} />
         <button type='submit'>Add</button>
       </form>
     </div>
